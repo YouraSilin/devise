@@ -13,3 +13,5 @@ replace this file https://github.com/YouraSilin/newapp/blob/main/config/database
 docker compose up
 
 docker compose exec web rake db:create db:migrate
+
+sudo chown -R $USER:$USER .

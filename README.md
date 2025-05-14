@@ -16,6 +16,10 @@ docker compose exec web rake db:create db:migrate
 
 sudo chown -R $USER:$USER .
 
+add this line to Gemfile:
+
+   gem 'devise'
+
 docker compose exec web rails generate devise:install
 
 docker compose exec web rails generate devise User

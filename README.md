@@ -6,7 +6,7 @@ cd devise
 
 docker compose build
 
-docker compose run --no-deps devise_web rails new . --force --database=postgresql --css=bootstrap
+docker compose run --no-deps web rails new . --force --database=postgresql --css=bootstrap
 
 replace this file https://github.com/YouraSilin/devise/blob/main/config/database.yml
   

@@ -1,4 +1,4 @@
-mkdir devise
+  mkdir devise
 
 git clone https://github.com/YouraSilin/devise.git devise
 
@@ -34,11 +34,7 @@ sudo chown -R $USER:$USER .
 
 В файл app/views/layouts/application.html.erb добавьте:
 
-"<p class="notice"><%= notice %></p>"
-
 &lt;p class="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;
-  
-"<p class="alert"><%= alert %></p>"
 
 &lt;p class="alert"&gt;&lt;%= alert %&gt;&lt;/p&gt;
 
@@ -127,3 +123,15 @@ end
   <%= link_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' } %>
 
 <% end %>
+
+Добавление администратоа
+
+docker exec web rails c
+
+Найдите пользователя, который должен стать администратором:
+
+user = User.find_by(email: "email@example.com")
+
+Установите ему роль admin:
+
+user.update(role: "admin")

@@ -18,16 +18,108 @@ sudo chown -R $USER:$USER .
 
 add this line to Gemfile:
 
-   gem 'devise'
+   gem "devise"
+
+docker compose exec web bundle install
 
 docker compose exec web rails generate devise:install
 
 docker compose exec web rails generate devise User
 
-rails db:migrate
-
-rails generate migration AddRoleToUsers role:string
+docker compose exec web rails generate migration AddRoleToUsers role:string
 
 rails db:migrate
 
-rails c User.update_all(role: 'viewer')
+sudo chown -R $USER:$USER .
+
+В файл app/views/layouts/application.html.erb добавьте:
+
+<p class="notice"><%= notice %></p>
+  
+<p class="alert"><%= alert %></p>
+
+Модифицируйте модель User (app/models/user.rb), чтобы задать роли:
+
+class User < ApplicationRecord
+
+  # Devise модули
+  
+  devise :database_authenticatable, :registerable,
+  
+         :recoverable, :rememberable, :validatable
+
+  # Установим роли
+  
+  enum role: { viewer: 'viewer', admin: 'admin' }
+
+  # Зададим роль по умолчанию
+  
+  after_initialize do
+  
+    self.role ||= :viewer
+    
+  end
+  
+end
+
+Задайте дефолтную роль в консоли (для существующих пользователей).
+
+docker compose exec web rails c "User.update_all(role: 'viewer')"
+
+Создайте два контроллера — один для просмотра (режим просмотра) и другой для админки (режим редактирования).
+
+Пример: создадим ресурс Posts.
+
+docker compose exec web rails generate scaffold Post title:string content:text
+
+docker compose exec web rails db:migrate
+
+Ограничиваем доступ в контроллере:
+
+Модифицируйте PostsController:
+
+class PostsController < ApplicationController
+
+  before_action :authenticate_user!
+  
+  before_action :authorize_admin, only: [:edit, :update, :destroy]
+
+  # Только администратор может редактировать и удалять
+  
+  def authorize_admin
+  
+    redirect_to root_path, alert: 'У вас нет прав для этого действия.' unless current_user.admin?
+  
+  end
+
+end
+
+Ограничиваем доступ в контроллере:
+
+Модифицируйте PostsController:
+
+class PostsController < ApplicationController
+
+  before_action :authenticate_user!
+  
+  before_action :authorize_admin, only: [:edit, :update, :destroy]
+
+  # Только администратор может редактировать и удалять
+  
+  def authorize_admin
+    
+    redirect_to root_path, alert: 'У вас нет прав для этого действия.' unless current_user.admin?
+  
+  end
+
+end
+
+Добавьте проверку прав администратора в представления, где доступны действия редактирования и удаления:
+
+<% if current_user.admin? %>
+  
+  <%= link_to 'Редактировать', edit_post_path(post) %>
+  
+  <%= link_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' } %>
+
+<% end %>

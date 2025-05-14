@@ -2,9 +2,9 @@
 FROM ruby:3.3.0
 
 RUN apt-get update -qq && apt-get install -y nodejs npm yarn postgresql-client
-WORKDIR /newapp
-COPY Gemfile /newapp/Gemfile
-COPY Gemfile.lock /newapp/Gemfile.lock
+WORKDIR /devise
+COPY Gemfile /devise/Gemfile
+COPY Gemfile.lock /devise/Gemfile.lock
 RUN npm install --global yarn
 RUN yarn add bootstrap
 RUN bundle install

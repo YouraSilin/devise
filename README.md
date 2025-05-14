@@ -35,8 +35,12 @@ sudo chown -R $USER:$USER .
 В файл app/views/layouts/application.html.erb добавьте:
 
 "<p class="notice"><%= notice %></p>"
+
+&lt;p class="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;
   
 "<p class="alert"><%= alert %></p>"
+
+&lt;p class="alert"&gt;&lt;%= alert %&gt;&lt;/p&gt;
 
 Модифицируйте модель User (app/models/user.rb), чтобы задать роли:
 

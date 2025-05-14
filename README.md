@@ -11,3 +11,7 @@ docker compose run --no-deps web rails new . --force --database=postgresql --css
 replace this file https://github.com/YouraSilin/devise/blob/main/config/database.yml
   
 docker compose up
+
+docker compose exec web rake db:create db:migrate
+
+sudo chown -R $USER:$USER .

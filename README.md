@@ -42,23 +42,23 @@ sudo chown -R $USER:$USER .
 
 class User < ApplicationRecord
 
-  # Devise модули #
-  
-  devise :database_authenticatable, :registerable,
-  
-         :recoverable, :rememberable, :validatable
+\# Devise модули
 
-  # Установим роли
-  
-  enum role: { viewer: 'viewer', admin: 'admin' }
+devise :database_authenticatable, :registerable,
 
-  # Зададим роль по умолчанию
+       :recoverable, :rememberable, :validatable
+
+\# Установим роли
+
+enum role: { viewer: 'viewer', admin: 'admin' }
+
+\# Зададим роль по умолчанию
+
+after_initialize do
+
+  self.role ||= :viewer
   
-  after_initialize do
-  
-    self.role ||= :viewer
-    
-  end
+end
   
 end
 

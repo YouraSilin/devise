@@ -94,26 +94,6 @@ class PostsController < ApplicationController
 
 end
 
-Ограничиваем доступ в контроллере:
-
-Модифицируйте PostsController:
-
-class PostsController < ApplicationController
-
-  before_action :authenticate_user!
-  
-  before_action :authorize_admin, only: [:edit, :update, :destroy]
-
-  \# Только администратор может редактировать и удалять
-  
-  def authorize_admin
-    
-    redirect_to root_path, alert: 'У вас нет прав для этого действия.' unless current_user.admin?
-  
-  end
-
-end
-
 Добавьте проверку прав администратора в представления, где доступны действия редактирования и удаления:
 
 <% if current_user.admin? %>

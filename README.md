@@ -32,6 +32,10 @@ docker compose exec web rails db:migrate
 
 sudo chown -R $USER:$USER .
 
+Here is a possible configuration for config/environments/development.rb:
+
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 В файл app/views/layouts/application.html.erb добавьте:
 
 &lt;p class="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;

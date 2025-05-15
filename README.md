@@ -102,9 +102,11 @@ class PostsController < ApplicationController
 
   \# Только администратор может редактировать и удалять
   
+  private
+
   def authorize_admin
   
-    redirect_to root_path, alert: 'У вас нет прав для этого действия.' unless current_user.admin?
+    redirect_to phones_path, alert: 'У вас нет прав для этого действия.' unless current_user&.admin?
   
   end
 

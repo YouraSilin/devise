@@ -42,7 +42,7 @@ sudo chown -R $USER:$USER .
 
 class User < ApplicationRecord
 
-  # Devise модули
+  # Devise модули #
   
   devise :database_authenticatable, :registerable,
   

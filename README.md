@@ -28,7 +28,7 @@ docker compose exec web rails generate devise User
 
 docker compose exec web rails generate migration AddRoleToUsers role:string
 
-rails db:migrate
+docker compose exec web rails db:migrate
 
 sudo chown -R $USER:$USER .
 

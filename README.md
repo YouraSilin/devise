@@ -106,7 +106,7 @@ end
 
 Добавление администратоа
 
-docker exec web rails c
+docker compose exec web rails c
 
 Найдите пользователя, который должен стать администратором:
 

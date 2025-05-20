@@ -91,6 +91,8 @@ docker compose exec web rails generate scaffold Post title:string content:text
 
 docker compose exec web rails db:migrate
 
+sudo chown -R $USER:$USER .
+
 Ограничиваем доступ в контроллере:
 
 Модифицируйте PostsController:

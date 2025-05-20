@@ -11,7 +11,7 @@ services:
     build: .
     command: ["bin/dev"]
     volumes:
-      - .:/newapp
+      - .:/devise
     ports:
       - "3001:3000"
     depends_on:

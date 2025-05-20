@@ -13,9 +13,9 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
     rm -rf /tmp/node-build-master
 
 # Set working directory and copy Gemfile for dependency installation
-WORKDIR /newapp
-COPY Gemfile /newapp/Gemfile
-COPY Gemfile.lock /newapp/Gemfile.lock
+WORKDIR /devise
+COPY Gemfile /devise/Gemfile
+COPY Gemfile.lock /devise/Gemfile.lock
 RUN gem install bundler -v 2.4.15
 RUN bundle install
 
@@ -26,14 +26,14 @@ RUN bundle clean --force \
   && find /usr/local/bundle/gems/ -name "*.o" -delete
 
 # Add JavaScript dependencies
-COPY package.json /newapp/package.json
+COPY package.json /devise/package.json
 RUN yarn install && yarn add bootstrap
 
 # Copy the rest of the application code
 COPY . .
 
 # Set directory ownership
-RUN chown -R root:root /newapp
+RUN chown -R root:root /devise
 
 # Add entrypoint script
 COPY entrypoint.sh /usr/bin/

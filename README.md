@@ -39,7 +39,7 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
 В файл app/views/layouts/application.html.erb добавьте:
 
-<ul class="navbar-nav ms-auto">
+    <ul class="navbar-nav ms-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
           <span class="nav-link">Вы зашли как: <strong><%= current_user.email %></strong></span>

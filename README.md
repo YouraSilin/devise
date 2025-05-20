@@ -85,4 +85,52 @@ docker compose exec web rails c "User.update_all(role: 'viewer')"
 
 Создайте два контроллера — один для просмотра (режим просмотра) и другой для админки (режим редактирования).
 
+Пример: создадим ресурс Posts.
 
+docker compose exec web rails generate scaffold Post title:string content:text
+
+docker compose exec web rails db:migrate
+
+Ограничиваем доступ в контроллере:
+
+Модифицируйте PostsController:
+
+class PostsController < ApplicationController
+
+  before_action :authenticate_user!
+  
+  before_action :authorize_admin, only: [:edit, :update, :destroy]
+
+  \# Только администратор может редактировать и удалять
+  
+  private
+
+  def authorize_admin
+  
+    redirect_to posts_path, alert: 'У вас нет прав для этого действия.' unless current_user&.admin?
+  
+  end
+
+end
+
+Добавьте проверку прав администратора в представления, где доступны действия редактирования и удаления:
+
+<% if current_user&.admin? %>
+  
+  <%= link_to 'Редактировать', edit_post_path(post) %>
+  
+  <%= link_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' } %>
+
+<% end %>
+
+Добавление администратоа
+
+docker compose exec web rails c
+
+Найдите пользователя, который должен стать администратором:
+
+user = User.find_by(email: "email@example.com")
+
+Установите ему роль admin:
+
+user.update(role: "admin")

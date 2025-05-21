@@ -148,7 +148,8 @@ erb (((
     <%= flash[:notice] %>
   </div>
 <% end %>
-
+)))
+    
 Добавление администратоа
 
 docker compose exec web rails c

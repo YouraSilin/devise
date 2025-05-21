@@ -57,10 +57,6 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
       <% end %>
     </ul>
 
-&lt;p class="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;
-
-&lt;p class="alert"&gt;&lt;%= alert %&gt;&lt;/p&gt;
-
 Модифицируйте модель User (app/models/user.rb), чтобы задать роли:
 
 class User < ApplicationRecord

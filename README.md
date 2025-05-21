@@ -137,11 +137,17 @@ end
 
 <% if current_user&.admin? %>
   
-  <%= link_to 'Редактировать', edit_post_path(post) %>
+  <%= link_to 'Редактировать', edit_post_path(@post) %>
   
-  <%= link_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' } %>
+  <%= button_to "Удалить эту запись", @post, method: :delete, data: { turbo_method: 'delete', turbo_confirm: "вы уверены?" } %>
 
 <% end %>
+
+Теперь в контроллер нужно добавить
+
+def edit
+    @phone = Phone.find(params[:id])
+  end
 
 Добавление администратоа
 

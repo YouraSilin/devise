@@ -135,6 +135,19 @@ def edit
     
 end
 
+В application.html.erb нужно добавить
+
+<% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+    <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
 Добавление администратоа
 
 docker compose exec web rails c

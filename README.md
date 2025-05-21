@@ -138,14 +138,23 @@ end
 В application.html.erb нужно добавить
 
 &lt;% if flash[:alert] %&gt;
+
   &lt;div class="alert alert-danger"&gt;
+  
     &lt;%= flash[:alert] %&gt;
+    
   &lt;/div&gt;
+  
 &lt;% end %&gt;
+
 &lt;% if flash[:notice] %&gt;
+
   &lt;div class="alert alert-success"&gt;
+  
     &lt;%= flash[:notice] %&gt;
+    
   &lt;/div&gt;
+  
 &lt;% end %&gt;
     
 Добавление администратоа

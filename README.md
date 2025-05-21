@@ -57,16 +57,6 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
       <% end %>
     </ul>
             
-      <% if flash[:alert] %>
-        <div class="alert alert-danger">
-          <%= flash[:alert] %>
-        </div>
-      <% end %>
-    
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <%= flash[:notice] %>
-        </div>
       <% end %>
 
 &lt;p class="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;

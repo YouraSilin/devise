@@ -16,7 +16,7 @@ https://github.com/YouraSilin/devise/blob/main/Dockerfile
 
 https://github.com/YouraSilin/devise/blob/main/Gemfile
 
-docker compose up
+docker-compose up --remove-orphans
 
 docker compose exec web rake db:create db:migrate
 

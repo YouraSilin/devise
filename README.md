@@ -146,8 +146,10 @@ end
 Теперь в контроллер нужно добавить
 
 def edit
+
     @phone = Phone.find(params[:id])
-  end
+    
+end
 
 Добавление администратоа
 

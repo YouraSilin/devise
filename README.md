@@ -56,8 +56,6 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
         </li>
       <% end %>
     </ul>
-            
-      <% end %>
 
 &lt;p class="notice"&gt;&lt;%= notice %&gt;&lt;/p&gt;
 

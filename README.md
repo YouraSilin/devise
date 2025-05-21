@@ -137,6 +137,7 @@ end
 
 В application.html.erb нужно добавить
 
+erb
 <% if flash[:alert] %>
   <div class="alert alert-danger">
     <%= flash[:alert] %>
